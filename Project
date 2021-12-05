@@ -66,8 +66,8 @@ def forFrame(frame_number, output_array, output_count):
             x[y] = img
             img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
             img_temp = img.copy()
-            unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+            varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
             signal[y] = img_temp[0][0]
             #print(signal[y])
             x1.append(signal[y])
@@ -89,8 +89,8 @@ def forFrame(frame_number, output_array, output_count):
             x[y] = img
             img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
             img_temp = img.copy()
-            unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+            varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
             signal[y+10] = img_temp[0][0]
             #print(signal[y+10])
             x1.append(signal[y])
@@ -112,8 +112,8 @@ def forFrame(frame_number, output_array, output_count):
             x[y] = img
             img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
             img_temp = img.copy()
-            unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+            varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
             signal[y+20] = img_temp[0][0]
            # print(signal[y+20])
             x1.append(signal[y])
@@ -135,8 +135,8 @@ def forFrame(frame_number, output_array, output_count):
             x[y] = img
             img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
             img_temp = img.copy()
-            unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+            varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+            img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
             signal[y+30] = img_temp[0][0]
             #print(signal[y+30])
             x1.append(signal[y])
@@ -170,15 +170,15 @@ execution_path = os.getcwd()
 
 #camera = cv.VideoCapture(0)
 
-detector = VideoObjectDetection()
-detector.setModelTypeAsRetinaNet()
-detector.setModelPath(os.path.join(execution_path , "resnet50_coco_best_v2.1.0.h5"))
-custom_objects = detector.CustomObjects(laptop=True, cell_phone=True,person=False)
-detector.loadModel(detection_speed="fastest")
+bounder = VideoObjectDetection()
+bounder.setModelTypeAsRetinaNet()
+bounder.setModelPath(os.path.join(execution_path , "resnet50_coco_best_v2.1.0.h5"))
+custom_objects = bounder.CustomObjects(laptop=True, cell_phone=True,person=False)
+bounder.loadModel(detection_speed="fastest")
 
-custom_objects = detector.CustomObjects(cell_phone=True, tv=True)
+custom_objects = bounder.CustomObjects(cell_phone=True, tv=True)
 
-video_path = detector.detectCustomObjectsFromVideo(
+video_path = bounder.detectCustomObjectsFromVideo(
                 custom_objects=custom_objects,
                 output_file_path=os.path.join(execution_path, "traffic_custom_detected"),# delete me
                 
@@ -212,8 +212,8 @@ while abc == 1:
                 x[y] = img
                 img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
                 img_temp = img.copy()
-                unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+                varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
                 signal[y] = img_temp[0][0]
                 #print(signal[y])
                 x1.append(signal[y])
@@ -235,8 +235,8 @@ while abc == 1:
                 x[y] = img
                 img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
                 img_temp = img.copy()
-                unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+                varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
                 signal[y+10] = img_temp[0][0]
                 #print(signal[y+10])
                 x1.append(signal[y])
@@ -258,8 +258,8 @@ while abc == 1:
                 x[y] = img
                 img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
                 img_temp = img.copy()
-                unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+                varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
                 signal[y+20] = img_temp[0][0]
                # print(signal[y+20])
                 x1.append(signal[y])
@@ -281,8 +281,8 @@ while abc == 1:
                 x[y] = img
                 img = cv.resize(img, dim, interpolation = cv.INTER_AREA)
                 img_temp = img.copy()
-                unique, counts = np.unique(img_temp.reshape(-1, 3), axis=0, return_counts=True)
-                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = unique[np.argmax(counts)]
+                varx, vary = np.varx(img_temp.reshape(-1, 3), axis=0, return_vary=True)
+                img_temp[:,:,0], img_temp[:,:,1], img_temp[:,:,2] = varx[np.argmax(vary)]
                 signal[y+30] = img_temp[0][0]
                 #print(signal[y+30])
                 x1.append(signal[y])
